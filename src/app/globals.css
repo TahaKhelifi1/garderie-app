@@ -1,26 +1,413 @@
-@import "tailwindcss";
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --daycare-yellow: #f59e0b;
+  --daycare-yellow-light: #fef3c7;
+  --daycare-yellow-dark: #d97706;
+  --daycare-coral: #ff6b6b;
+  --daycare-coral-light: #ffe5e5;
+  --daycare-coral-dark: #fa5252;
+  --daycare-sky: #0ea5e9;
+  --daycare-sky-light: #e0f2fe;
+  --daycare-mint: #10b981;
+  --daycare-mint-light: #d1fae5;
+  --daycare-purple: #8b5cf6;
+  --daycare-purple-light: #ede9fe;
+  --daycare-cream: #fffdfa;
+  --daycare-card-bg: #ffffff;
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+  --border-subtle: #f1f5f9;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  color: var(--text-dark);
+  background-color: var(--daycare-cream);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .brand-font {
+  font-family: var(--font-quicksand), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Navbar Custom Styling */
+.daycare-navbar {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(245, 158, 11, 0.15);
+  transition: all 0.3s ease;
+}
+
+.daycare-navbar .nav-link {
+  color: #334155;
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 0.6rem 1rem !important;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.daycare-navbar .nav-link:hover,
+.daycare-navbar .nav-link.active {
+  color: var(--daycare-coral-dark);
+  background-color: var(--daycare-coral-light);
+}
+
+.brand-badge {
+  background: linear-gradient(135deg, #fef3c7 0%, #fee2e2 100%);
+  color: #b45309;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  display: inline-block;
+}
+
+/* Custom Buttons */
+.btn-daycare-primary {
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+  color: #ffffff !important;
+  font-weight: 700;
+  font-family: var(--font-quicksand), sans-serif;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  font-size: 1.05rem;
+  box-shadow: 0 8px 20px -4px rgba(245, 158, 11, 0.45);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-daycare-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px -4px rgba(245, 158, 11, 0.6);
+  background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
+  color: #ffffff !important;
+}
+
+.btn-daycare-coral {
+  background: linear-gradient(135deg, #ff6b6b 0%, #fa5252 100%);
+  color: #ffffff !important;
+  font-weight: 700;
+  font-family: var(--font-quicksand), sans-serif;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  font-size: 1.05rem;
+  box-shadow: 0 8px 20px -4px rgba(255, 107, 107, 0.4);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-daycare-coral:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px -4px rgba(255, 107, 107, 0.55);
+  background: linear-gradient(135deg, #f03e3e 0%, #e03131 100%);
+  color: #ffffff !important;
+}
+
+.btn-daycare-outline {
+  background: #ffffff;
+  color: #334155 !important;
+  font-weight: 700;
+  font-family: var(--font-quicksand), sans-serif;
+  border: 2px solid #e2e8f0;
+  border-radius: 9999px;
+  padding: 0.7rem 1.6rem;
+  font-size: 1.05rem;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-daycare-outline:hover {
+  border-color: var(--daycare-yellow);
+  color: var(--daycare-yellow-dark) !important;
+  background-color: var(--daycare-yellow-light);
+  transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  background: radial-gradient(circle at 10% 20%, rgba(254, 243, 199, 0.6) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, rgba(255, 229, 229, 0.6) 0%, transparent 45%),
+              linear-gradient(180deg, #ffffff 0%, #fffdfa 100%);
+  padding-top: 4.5rem;
+  padding-bottom: 5.5rem;
+  overflow: hidden;
+}
+
+.hero-title-highlight {
+  background: linear-gradient(120deg, #f59e0b 0%, #ff6b6b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-pill-badge {
+  background: linear-gradient(135deg, #fef3c7 0%, #ffe4e6 100%);
+  color: #9a3412;
+  font-family: var(--font-quicksand), sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.45rem 1.15rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(251, 146, 60, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.12);
+}
+
+.hero-image-wrapper {
+  position: relative;
+  border-radius: 2rem;
+  padding: 0.5rem;
+  background: linear-gradient(135deg, #ffffff, #fff1f2, #fef3c7);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(245, 158, 11, 0.15);
+}
+
+.hero-image {
+  border-radius: 1.6rem;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.floating-badge {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.75rem 1.15rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: float 4s ease-in-out infinite alternate;
+  z-index: 10;
+}
+
+.floating-badge-top {
+  top: -15px;
+  right: -10px;
+}
+
+.floating-badge-bottom {
+  bottom: -20px;
+  left: -10px;
+  animation-delay: -2s;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-8px); }
+}
+
+/* Bootstrap Cards Enhancements (Services Section) */
+.services-section {
+  position: relative;
+  background-color: #ffffff;
+  padding-top: 5rem;
+  padding-bottom: 6rem;
+}
+
+.service-card {
+  border-radius: 1.5rem !important;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+  background: #ffffff;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 40px -10px rgba(245, 158, 11, 0.18), 0 0 0 2px rgba(245, 158, 11, 0.3) !important;
+}
+
+.service-card-img-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #f8fafc;
+  height: 220px;
+}
+
+.service-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.service-card:hover .service-card-img {
+  transform: scale(1.06);
+}
+
+.service-card .card-body {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.service-card .card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.service-card:hover .card-title {
+  color: var(--daycare-coral-dark);
+}
+
+.service-card .card-text {
+  color: #64748b;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.service-features-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+.service-features-list li {
+  font-size: 0.92rem;
+  color: #475569;
+  margin-bottom: 0.55rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.service-features-list li i {
+  color: var(--daycare-mint);
+  font-size: 1.05rem;
+}
+
+.service-card-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px dashed #e2e8f0;
+}
+
+/* Custom Age / Category Badges */
+.badge-age-yellow {
+  background-color: var(--daycare-yellow-light);
+  color: #92400e;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.82rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.badge-age-coral {
+  background-color: var(--daycare-coral-light);
+  color: #9f1239;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.82rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.badge-age-mint {
+  background-color: var(--daycare-mint-light);
+  color: #065f46;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.82rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Feature pill / Trust stat cards */
+.stat-card {
+  background: #ffffff;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.stat-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 0.85rem;
+}
+
+/* Footer */
+.daycare-footer {
+  background-color: #1e293b;
+  color: #cbd5e1;
+  padding-top: 4.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.daycare-footer a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.daycare-footer a:hover {
+  color: #fbbf24;
+}
+
+/* Section Header Badges */
+.section-badge {
+  display: inline-block;
+  font-family: var(--font-quicksand), sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
 }
