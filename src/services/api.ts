@@ -1,7 +1,15 @@
 import { GarderieInfo, ServiceItem, ActiviteItem } from "@/types";
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+export const getApiBaseUrl = () => {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  if (typeof window !== "undefined") {
+    // Dans le navigateur, utilise le proxy Next.js /api (sans risque de CORS ou port bloqué)
+    return "/api";
+  }
+  return "http://127.0.0.1:5000/api";
+};
 
 // Données de secours par défaut au cas où le serveur Express n'est pas encore lancé
 export const defaultGarderieInfo: GarderieInfo = {
@@ -116,7 +124,7 @@ export const defaultActivites: ActiviteItem[] = [
  */
 export async function fetchGarderieInfo(): Promise<GarderieInfo> {
   try {
-    const res = await fetch(`${API_BASE_URL}/garderie`, {
+    const res = await fetch(`${getApiBaseUrl()}/garderie`, {
       cache: "no-store",
     });
     if (!res.ok) throw new Error(`Erreur HTTP: ${res.status}`);
@@ -133,7 +141,7 @@ export async function fetchGarderieInfo(): Promise<GarderieInfo> {
  */
 export async function fetchServices(): Promise<ServiceItem[]> {
   try {
-    const res = await fetch(`${API_BASE_URL}/services`, {
+    const res = await fetch(`${getApiBaseUrl()}/services`, {
       cache: "no-store",
     });
     if (!res.ok) throw new Error(`Erreur HTTP: ${res.status}`);
@@ -150,7 +158,7 @@ export async function fetchServices(): Promise<ServiceItem[]> {
  */
 export async function fetchActivites(): Promise<ActiviteItem[]> {
   try {
-    const res = await fetch(`${API_BASE_URL}/activites`, {
+    const res = await fetch(`${getApiBaseUrl()}/activites`, {
       cache: "no-store",
     });
     if (!res.ok) throw new Error(`Erreur HTTP: ${res.status}`);

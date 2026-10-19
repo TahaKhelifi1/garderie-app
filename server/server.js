@@ -6,6 +6,15 @@ const PORT = process.env.PORT || 5000;
 
 // Middlewares
 app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
 app.use(express.json());
 
 // Données : Informations générales de la garderie
@@ -165,7 +174,7 @@ app.get('/', (req, res) => {
 
 // Démarrage du serveur si exécuté directement
 if (require.main === module) {
-  app.listen(PORT, () => {
+  app.listen(PORT, '0.0.0.0', () => {
     console.log(`Serveur Express démarré sur http://localhost:${PORT}`);
     console.log(`- GET /api/garderie`);
     console.log(`- GET /api/services`);
