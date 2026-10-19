@@ -1,8 +1,11 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
+import { GarderieInfo } from "@/types";
+import { fetchGarderieInfo, defaultGarderieInfo } from "@/services/api";
 
 export default function BookingContact() {
+  const [info, setInfo] = useState<GarderieInfo>(defaultGarderieInfo);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     parentName: "",
@@ -14,13 +17,23 @@ export default function BookingContact() {
     message: "",
   });
 
+  useEffect(() => {
+    let isMounted = true;
+    fetchGarderieInfo().then((data) => {
+      if (isMounted) setInfo(data);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
   };
 
   return (
-    <section id="visite" className="py-5 position-relative" style={{ backgroundColor: "#ffffff" }}>
+    <section id="contact" className="py-5 position-relative" style={{ backgroundColor: "#ffffff" }}>
       <div className="container py-4">
         <div className="row justify-content-center text-center mb-5">
           <div className="col-12 col-md-8">
@@ -31,13 +44,13 @@ export default function BookingContact() {
                 color: "var(--daycare-yellow-dark)",
               }}
             >
-              🗓️ Inscriptions 2026-2027
+              ✉️ Contact & Inscriptions
             </span>
             <h2 className="display-6 fw-bold text-dark mt-2 mb-3">
-              Venez visiter notre garderie avec votre enfant !
+              Contactez-nous & Réservez une visite !
             </h2>
             <p className="lead text-muted fs-6">
-              Rien ne remplace le contact humain. Réservez une visite découverte de 30 minutes sans engagement pour rencontrer notre équipe et ressentir l'ambiance chaleureuse de nos locaux.
+              Une question sur nos programmes ou envie de découvrir nos locaux ? Remplissez ce formulaire et notre équipe vous recontactera rapidement.
             </p>
           </div>
         </div>
@@ -54,9 +67,9 @@ export default function BookingContact() {
                   >
                     <i className="bi bi-check-circle-fill fs-1"></i>
                   </div>
-                  <h3 className="fs-3 fw-bold text-dark mb-2">Demande envoyée avec succès !</h3>
+                  <h3 className="fs-3 fw-bold text-dark mb-2">Message envoyé avec succès !</h3>
                   <p className="text-muted mb-4">
-                    Merci <strong>{formData.parentName || "cher parent"}</strong> ! Notre directrice pédagogique prendra contact avec vous dans les 24h ouvrées pour confirmer votre rendez-vous.
+                    Merci <strong>{formData.parentName || "cher parent"}</strong> ! Nous prendrons contact avec vous très rapidement au <strong>{formData.phone || formData.email}</strong>.
                   </p>
                   <button
                     type="button"
@@ -74,20 +87,20 @@ export default function BookingContact() {
                       });
                     }}
                   >
-                    Faire une autre demande
+                    Envoyer un autre message
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit}>
                   <h3 className="fs-4 fw-bold text-dark mb-4 d-flex align-items-center gap-2">
-                    <i className="bi bi-pencil-square text-warning"></i>
-                    Formulaire de visite & pré-inscription
+                    <i className="bi bi-envelope-paper-heart-fill text-warning"></i>
+                    Formulaire de Contact & Visite
                   </h3>
 
                   <div className="row g-3">
                     <div className="col-12 col-sm-6">
                       <label className="form-label small fw-bold text-secondary">
-                        Nom et Prénom du parent *
+                        Nom et Prénom *
                       </label>
                       <input
                         type="text"
@@ -109,7 +122,7 @@ export default function BookingContact() {
                         type="tel"
                         required
                         className="form-control form-control-lg rounded-3 fs-6"
-                        placeholder="Ex : 06 12 34 56 78"
+                        placeholder="Ex : 55 123 388"
                         value={formData.phone}
                         onChange={(e) =>
                           setFormData({ ...formData, phone: e.target.value })
@@ -125,7 +138,7 @@ export default function BookingContact() {
                         type="email"
                         required
                         className="form-control form-control-lg rounded-3 fs-6"
-                        placeholder="marie.dupont@email.com"
+                        placeholder="parent@email.com"
                         value={formData.email}
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
@@ -135,11 +148,10 @@ export default function BookingContact() {
 
                     <div className="col-12 col-sm-6">
                       <label className="form-label small fw-bold text-secondary">
-                        Âge de votre enfant *
+                        Âge de votre enfant
                       </label>
                       <input
                         type="text"
-                        required
                         className="form-control form-control-lg rounded-3 fs-6"
                         placeholder="Ex : 14 mois / 3 ans"
                         value={formData.childAge}
@@ -151,7 +163,7 @@ export default function BookingContact() {
 
                     <div className="col-12 col-sm-6">
                       <label className="form-label small fw-bold text-secondary">
-                        Service souhaité
+                        Programme qui vous intéresse
                       </label>
                       <select
                         className="form-select form-select-lg rounded-3 fs-6"
@@ -164,15 +176,15 @@ export default function BookingContact() {
                         }
                       >
                         <option value="eveil">Crèche Douceur & Éveil (3 à 18 mois)</option>
-                        <option value="arts">Ateliers d'Art & Expression (18 mois à 3 ans)</option>
+                        <option value="arts">Ateliers d&apos;Art & Expression (18 mois à 3 ans)</option>
                         <option value="nature">Jardin Nature & Pré-maternelle (3 à 6 ans)</option>
-                        <option value="autre">Accueil occasionnel / Autre</option>
+                        <option value="autre">Accueil occasionnel / Autre question</option>
                       </select>
                     </div>
 
                     <div className="col-12 col-sm-6">
                       <label className="form-label small fw-bold text-secondary">
-                        Date souhaitée pour la visite
+                        Date souhaitée de visite (optionnel)
                       </label>
                       <input
                         type="date"
@@ -186,12 +198,13 @@ export default function BookingContact() {
 
                     <div className="col-12">
                       <label className="form-label small fw-bold text-secondary">
-                        Questions particulières ou précisions
+                        Votre message ou question *
                       </label>
                       <textarea
-                        rows={3}
+                        rows={4}
+                        required
                         className="form-control rounded-3 fs-6"
-                        placeholder="Allergies, date d'entrée souhaitée, temps plein ou partiel..."
+                        placeholder="Bonjour, j'aimerais avoir plus de renseignements sur les inscriptions..."
                         value={formData.message}
                         onChange={(e) =>
                           setFormData({ ...formData, message: e.target.value })
@@ -202,10 +215,10 @@ export default function BookingContact() {
                     <div className="col-12 mt-4">
                       <button
                         type="submit"
-                        className="btn btn-daycare-primary w-100 py-3 justify-content-center fs-5"
+                        className="btn btn-daycare-primary w-100 py-3 justify-content-center fs-5 shadow-sm"
                       >
                         <i className="bi bi-send-fill"></i>
-                        <span>Confirmer ma demande de visite</span>
+                        <span>Envoyer mon message</span>
                       </button>
                     </div>
                   </div>
@@ -215,7 +228,7 @@ export default function BookingContact() {
           </div>
 
           {/* Contact Details & Opening Hours Column */}
-          <div className="col-12 col-lg-5" id="contact">
+          <div className="col-12 col-lg-5">
             <div className="p-4 p-md-5 rounded-4 h-100 d-flex flex-column justify-content-between" style={{ background: "linear-gradient(145deg, #fff7ed 0%, #fef2f2 100%)", border: "1px solid rgba(251, 146, 60, 0.2)" }}>
               <div>
                 <h3 className="fs-4 fw-bold text-dark mb-4 d-flex align-items-center gap-2">
@@ -225,39 +238,55 @@ export default function BookingContact() {
 
                 <div className="d-flex flex-column gap-4">
                   <div className="d-flex align-items-start gap-3">
-                    <div className="rounded-circle bg-white text-warning shadow-sm p-3 d-flex align-items-center justify-content-center" style={{ width: "48px", height: "48px" }}>
-                      <i className="bi bi-geo-alt fs-5"></i>
+                    <div className="rounded-circle bg-white text-danger shadow-sm p-3 d-flex align-items-center justify-content-center" style={{ width: "48px", height: "48px" }}>
+                      <i className="bi bi-geo-alt-fill fs-5"></i>
                     </div>
                     <div>
                       <h4 className="fs-6 fw-bold text-dark mb-1">Notre Adresse</h4>
                       <p className="text-muted small mb-0">
-                        15 Derriere mosque el-fath,2200 Tozeur,Tunisie<br />
+                        {info.adresse}
                       </p>
                     </div>
                   </div>
 
                   <div className="d-flex align-items-start gap-3">
                     <div className="rounded-circle bg-white text-success shadow-sm p-3 d-flex align-items-center justify-content-center" style={{ width: "48px", height: "48px" }}>
-                      <i className="bi bi-telephone fs-5"></i>
+                      <i className="bi bi-telephone-fill fs-5"></i>
                     </div>
                     <div>
                       <h4 className="fs-6 fw-bold text-dark mb-1">Téléphone & WhatsApp</h4>
                       <p className="text-muted small mb-0">
-                        55 123 388<br />
-                        Disponibles pour toute question du lundi au vendredi.
+                        <a href={`tel:${info.telephone.replace(/\s+/g, '')}`} className="text-dark fw-bold text-decoration-none">
+                          {info.telephone}
+                        </a>
+                        <br />
+                        <span className="text-muted">Disponible du lundi au vendredi.</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="d-flex align-items-start gap-3">
+                    <div className="rounded-circle bg-white text-warning shadow-sm p-3 d-flex align-items-center justify-content-center" style={{ width: "48px", height: "48px" }}>
+                      <i className="bi bi-envelope-fill fs-5"></i>
+                    </div>
+                    <div>
+                      <h4 className="fs-6 fw-bold text-dark mb-1">Email Direct</h4>
+                      <p className="text-muted small mb-0">
+                        <a href={`mailto:${info.email}`} className="text-dark text-decoration-none fw-semibold">
+                          {info.email}
+                        </a>
                       </p>
                     </div>
                   </div>
 
                   <div className="d-flex align-items-start gap-3">
                     <div className="rounded-circle bg-white text-info shadow-sm p-3 d-flex align-items-center justify-content-center" style={{ width: "48px", height: "48px" }}>
-                      <i className="bi bi-clock fs-5"></i>
+                      <i className="bi bi-clock-fill fs-5"></i>
                     </div>
                     <div>
-                      <h4 className="fs-6 fw-bold text-dark mb-1">Horaires d'Accueil</h4>
+                      <h4 className="fs-6 fw-bold text-dark mb-1">Horaires d&apos;Accueil</h4>
                       <p className="text-muted small mb-0">
-                        <strong>Lundi - Vendredi :</strong> 07h30 - 18h30<br />
-                        <strong>Fermeture annuelle :</strong> 2 semaines en août & semaine entre Noël et Nouvel An.
+                        <strong>{info.horaires}</strong>
                       </p>
                     </div>
                   </div>
@@ -268,9 +297,9 @@ export default function BookingContact() {
               <div className="mt-4 p-3 rounded-3 bg-white shadow-sm border border-warning-subtle d-flex align-items-center gap-3">
                 <i className="bi bi-patch-check-fill text-warning fs-1"></i>
                 <div>
-                  <div className="fw-bold text-dark small">Établissement Agréé</div>
+                  <div className="fw-bold text-dark small">{info.nom}</div>
                   <div className="text-muted" style={{ fontSize: "0.8rem" }}>
-                    Agrément Protection Maternelle et Infantile (PMI) & Allocations Familiales (CAF - CMG applicable).
+                    {info.slogan}
                   </div>
                 </div>
               </div>
