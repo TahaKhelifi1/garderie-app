@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgArt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0F5" />
+      <stop offset="50%" stop-color="#FFE4E1" />
+      <stop offset="100%" stop-color="#FFF8DC" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bgArt)" rx="16" />
+  <circle cx="90" cy="80" r="50" fill="#FFB4D6" opacity="0.4" />
+  <circle cx="520" cy="110" r="70" fill="#BAE6FD" opacity="0.5" />
+  <circle cx="480" cy="320" r="60" fill="#FED7AA" opacity="0.6" />
+  <circle cx="120" cy="310" r="45" fill="#BBF7D0" opacity="0.5" />
+  <polygon points="210,340 225,340 285,130 270,130" fill="#D4A373" />
+  <polygon points="390,340 375,340 315,130 330,130" fill="#D4A373" />
+  <rect x="292" y="110" width="16" height="230" fill="#A47148" />
+  <rect x="180" y="275" width="240" height="14" rx="5" fill="#8B5A2B" />
+  <rect x="200" y="120" width="200" height="155" rx="8" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="3" />
+  <path d="M 235,245 A 65,65 0 0,1 365,245" fill="none" stroke="#F43F5E" stroke-width="12" stroke-linecap="round" />
+  <path d="M 247,245 A 53,53 0 0,1 353,245" fill="none" stroke="#FB923C" stroke-width="10" stroke-linecap="round" />
+  <path d="M 258,245 A 42,42 0 0,1 342,245" fill="none" stroke="#FACC15" stroke-width="9" stroke-linecap="round" />
+  <path d="M 268,245 A 32,32 0 0,1 332,245" fill="none" stroke="#4ADE80" stroke-width="8" stroke-linecap="round" />
+  <path d="M 277,245 A 23,23 0 0,1 323,245" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" />
+  <circle cx="235" cy="155" r="14" fill="#FBBF24" />
+  <circle cx="231" cy="152" r="1.5" fill="#78350F" />
+  <circle cx="239" cy="152" r="1.5" fill="#78350F" />
+  <path d="M 231,158 Q 235,162 239,158" stroke="#78350F" stroke-width="1.2" fill="none" stroke-linecap="round" />
+  <g transform="translate(130, 240) rotate(-15)">
+    <path d="M 50,20 C 120,-10 160,50 140,100 C 120,150 40,150 10,110 C -15,75 10,35 50,20 Z" fill="#EAC89F" stroke="#C69866" stroke-width="3" />
+    <circle cx="120" cy="95" r="12" fill="#FFFFFF" opacity="0.8" />
+    <circle cx="45" cy="35" r="10" fill="#EF4444" />
+    <circle cx="80" cy="30" r="10" fill="#F59E0B" />
+    <circle cx="115" cy="45" r="10" fill="#10B981" />
+    <circle cx="130" cy="75" r="9" fill="#3B82F6" />
+    <circle cx="65" cy="115" r="10" fill="#8B5CF6" />
+    <circle cx="35" cy="80" r="9" fill="#EC4899" />
+  </g>
+</svg>
