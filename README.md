@@ -6,14 +6,41 @@ Application web moderne et responsive pour la garderie et crèche d'enfants **"L
 
 ## 📋 Table des matières
 
-1. [Présentation du projet](#-présentation-du-projet)
-2. [Fonctionnalités](#-fonctionnalités)
-3. [Technologies utilisées](#-technologies-utilisées)
-4. [Structure des dossiers](#-structure-des-dossiers)
-5. [Historique des branches Git](#-historique-des-branches-git)
-6. [Installation et exécution](#-installation-et-exécution)
-7. [Documentation des API REST](#-documentation-des-api-rest)
-8. [Auteur](#-auteur)
+1. [Aperçu de l'application](#-aperçu-de-lapplication-captures-décran)
+2. [Présentation du projet](#-présentation-du-projet)
+3. [Fonctionnalités](#-fonctionnalités)
+4. [Technologies utilisées](#-technologies-utilisées)
+5. [Structure des dossiers](#-structure-des-dossiers)
+6. [Historique des branches Git](#-historique-des-branches-git)
+7. [Installation et exécution](#-installation-et-exécution)
+8. [Documentation des API REST](#-documentation-des-api-rest)
+9. [Auteur](#-auteur)
+
+---
+
+## 📸 Aperçu de l'application (Captures d'écran)
+
+### 1. Barre de navigation & Section Hero
+Interface d'accueil chaleureuse avec logo, menu de navigation responsive, titre d'accroche percutant, badges de réassurance et boutons d'appel à l'action.
+![Barre de navigation et Section Hero](docs/screenshots/01-hero-navbar.png)
+
+---
+
+### 2. Programmes d'éveil & Services (Cartes Bootstrap)
+Présentation des 3 programmes adaptés par tranche d'âge sous forme de cartes Bootstrap interactives (effets de survol, badges colorés et points forts pédagogiques).
+![Section Services d'éveil](docs/screenshots/02-services.png)
+
+---
+
+### 3. Activités pédagogiques quotidiennes (API Express dynamique)
+Grille des activités et ateliers pour enfants chargés dynamiquement depuis la route `GET /api/activites` du backend Express.
+![Section Activités pédagogiques](docs/screenshots/03-activites.png)
+
+---
+
+### 4. Formulaire de contact & Informations pratiques
+Formulaire complet pour les prises de contact et réservations de visite, accompagné des coordonnées pratiques dynamiques (`GET /api/garderie`).
+![Formulaire de contact et réservations](docs/screenshots/04-contact-form.png)
 
 ---
 
@@ -26,19 +53,21 @@ Le projet a été développé selon une démarche rigoureuse en plusieurs étape
 2. Découpage et modularisation en composants réutilisables (**Navbar**, **Hero**, **Services**).
 3. Développement d'un serveur backend **Node.js / Express** exposant trois routes d'API REST.
 4. Intégration dynamique des données de l'API dans les composants React du frontend.
+5. Ajout d'un formulaire interactif de contact et de réservation de visite.
 
 ---
 
 ## ✨ Fonctionnalités
 
 - **Navbar Responsive** : Logo, identité visuelle de la garderie, menu de navigation avec ancres et bouton d'action (CTA), menu burger tactile pour mobiles.
-- **Section Hero** : Titre d'accroche percutant, description bienveillante, illustration animée, badges de confiance (Agrément PMI, Horaires, 100% Bio) et boutons d'appel à l'action.
-- **Section Services (Cartes Bootstrap)** : 3 programmes d'éveil adaptés par tranche d'âge présentés sous forme de cartes Bootstrap interactives (effets de survol, badges d'âge, points forts pédagogiques) :
+- **Section Hero** : Titre d'accroche percutant, description bienveillante, illustration animée, badges de confiance et boutons d'appel à l'action.
+- **Section Services (Cartes Bootstrap)** : 3 programmes d'éveil adaptés par tranche d'âge présentés sous forme de cartes Bootstrap interactives :
   - *Crèche Douceur & Éveil Sensoriel* (3 à 18 mois)
   - *Ateliers Créatifs & Langage* (18 mois à 3 ans)
   - *Découverte & Plein Air* (3 à 5 ans)
-- **Section Activités Pédagogiques** : Grille dynamique des ateliers quotidiens (Éveil Musical, Potager & Nature, Peinture & Arts, Parcours Moteur).
-- **Section Contact & Visite** : Coordonnées dynamiques, prise de rendez-vous, horaires et adresse.
+- **Section Activités Pédagogiques** : Grille dynamique des ateliers quotidiens (*Éveil Musical*, *Potager & Nature*, *Peinture & Arts*, *Parcours Moteur*).
+- **Formulaire de Contact & Visite** : Formulaire interactif (nom, téléphone, email, âge de l'enfant, service souhaité, date, message) avec confirmation de soumission.
+- **Informations Pratiques Dynamiques** : Coordonnées, téléphone, email et horaires alimentés en temps réel par l'API Express.
 - **Design Responsive** : Optimisé pour smartphones, tablettes et ordinateurs de bureau grâce à la grille Bootstrap 5 et aux styles personnalisés.
 
 ---
@@ -64,11 +93,19 @@ Le projet a été développé selon une démarche rigoureuse en plusieurs étape
 
 ```text
 garderie-app/
+├── docs/                       # Documentation et captures d'écran
+│   └── screenshots/            # Captures d'écran de l'application
+│       ├── 01-hero-navbar.png
+│       ├── 02-services.png
+│       ├── 03-activites.png
+│       └── 04-contact-form.png
 ├── public/                     # Fichiers statiques et médias
 │   └── images/                 # Logos, bannières et illustrations SVG/JPG
 │       ├── logo.jpg
 │       ├── hero-banner.jpg
+│       ├── hero-daycare.jpg
 │       ├── service-eveil.jpg
+│       ├── service-eveil.svg
 │       ├── service-arts.svg
 │       └── service-nature.svg
 ├── server/                     # Serveur Backend Express
@@ -82,14 +119,15 @@ garderie-app/
 │   │   ├── Navbar.tsx          # Barre de navigation responsive
 │   │   ├── Hero.tsx            # Section Hero avec bannière et CTA
 │   │   ├── Services.tsx        # Section Services (3 cartes Bootstrap)
-│   │   └── Activites.tsx       # Section Activités pédagogiques
+│   │   ├── Activites.tsx       # Section Activités pédagogiques
+│   │   └── BookingContact.tsx  # Formulaire de contact et panneau d'informations
 │   ├── services/
 │   │   └── api.ts              # Fonctions de communication avec l'API Express
 │   └── types/
 │       └── index.ts            # Interfaces TypeScript (GarderieInfo, ServiceItem, ActiviteItem)
 ├── package.json                # Dépendances et scripts npm
 ├── tsconfig.json               # Configuration TypeScript
-├── next.config.ts              # Configuration Next.js
+├── next.config.ts              # Configuration Next.js (rewrites API proxy)
 └── README.md                   # Documentation du projet
 ```
 
@@ -106,7 +144,7 @@ Conformément aux exigences du projet, le cycle de vie git suit une stratégie d
 | `feature/components` | Extraction et modularisation en trois composants indépendants : `Navbar.tsx`, `Hero.tsx`, et `Services.tsx` | Fusionnée dans `main` |
 | `feature/backend` | Création du serveur Node.js / Express exposant `/api/garderie`, `/api/services` et `/api/activites` | Fusionnée dans `main` |
 | `feature/api-integration` | Raccordement dynamique des composants React du frontend aux API Express | Fusionnée dans `main` |
-| `docs/readme` | Rédaction de la documentation complète du projet | Fusionnée dans `main` |
+| `docs/readme` | Rédaction de la documentation complète du projet et intégration des captures | Fusionnée dans `main` |
 
 ---
 
@@ -131,9 +169,9 @@ npm install
 
 #### Option A : Lancer le Backend et le Frontend en une seule commande (Recommandé)
 ```bash
-npm run dev:all
+npm run dev
 ```
-Cette commande lance simultanément le serveur Express sur `http://localhost:5000` et Next.js sur `http://localhost:3000`.
+*(ou `npm run dev:all`)*. Cette commande démarre simultanément le serveur Express sur `http://localhost:5000` et Next.js sur `http://localhost:3000`.
 
 #### Option B : Lancer les services séparément
 - **Serveur Backend Express** :
@@ -144,7 +182,7 @@ Cette commande lance simultanément le serveur Express sur `http://localhost:500
 
 - **Application Frontend Next.js** (dans un autre terminal) :
   ```bash
-  npm run dev
+  npm run dev:frontend
   ```
   Le frontend est accessible sur : [http://localhost:3000](http://localhost:3000)
 
@@ -173,9 +211,9 @@ Renvoie les informations générales et institutionnelles de la garderie.
     "nom": "Garderie Les Petits Rayons",
     "slogan": "Grandir, s'épanouir et sourire chaque jour",
     "description": "Un environnement chaleureux, bienveillant et sécurisé pensé pour l'épanouissement, la créativité et le bien-être de votre enfant de 3 mois à 5 ans.",
-    "adresse": "15 Avenue des Petits Pas, 75015 Paris",
-    "telephone": "01 23 45 67 89",
-    "email": "contact@petitsrayons.fr",
+    "adresse": "15 Derriere mosque el-fath,2200 Tozeur,Tunisie",
+    "telephone": "55 123 388",
+    "email": "sissykids2050@gmail.com",
     "horaires": "Lundi – Vendredi : 7h30 – 18h30",
     "capacite": 35,
     "anneeFondation": 2018,
