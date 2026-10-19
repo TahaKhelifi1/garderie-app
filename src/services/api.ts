@@ -17,9 +17,9 @@ export const defaultGarderieInfo: GarderieInfo = {
   slogan: "Grandir, s'épanouir et sourire chaque jour",
   description:
     "Un cocon chaleureux où chaque enfant grandit à son rythme. Nous offrons à vos enfants (de 3 mois à 6 ans) un cadre sécurisant, joyeux et stimulant avec une alimentation 100 % biologique et un encadrement bienveillant.",
-  adresse: "15 Avenue des Petits Pas, 75015 Paris",
-  telephone: "01 23 45 67 89",
-  email: "contact@petitsrayons.fr",
+  adresse: "15 derrier mosquée al fatah, 2200 Tozeur Tunisie ",
+  telephone: "55 123 388",
+  email: "sissykids2050@gmail.com",
   horaires: "Lundi – Vendredi : 7h30 – 18h30",
   capacite: 35,
   anneeFondation: 2018,

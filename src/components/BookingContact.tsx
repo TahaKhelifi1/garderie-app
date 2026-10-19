@@ -231,8 +231,7 @@ export default function BookingContact() {
                     <div>
                       <h4 className="fs-6 fw-bold text-dark mb-1">Notre Adresse</h4>
                       <p className="text-muted small mb-0">
-                        15 Avenue des Petits Pas, 75015 Paris<br />
-                        (Accès poussettes & parking dépose-minute sécurisé)
+                        15 Derriere mosque el-fath,2200 Tozeur,Tunisie<br />
                       </p>
                     </div>
                   </div>
@@ -244,7 +243,7 @@ export default function BookingContact() {
                     <div>
                       <h4 className="fs-6 fw-bold text-dark mb-1">Téléphone & WhatsApp</h4>
                       <p className="text-muted small mb-0">
-                        01 23 45 67 89 / 06 98 76 54 32<br />
+                        55 123 388<br />
                         Disponibles pour toute question du lundi au vendredi.
                       </p>
                     </div>

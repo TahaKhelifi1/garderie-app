@@ -66,6 +66,7 @@ export default function Services() {
                     width={400}
                     height={220}
                     className="card-img-top service-card-img"
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                   <span
                     className={`badge-age ${s.badgeClass} position-absolute top-0 start-0 m-3`}
