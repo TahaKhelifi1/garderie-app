@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"npm run server\" \"next dev\"",
     "server": "node server/server.js",
+    "dev:frontend": "next dev",
     "dev:all": "concurrently \"npm run server\" \"next dev\"",
     "build": "next build",
     "start": "next start",
