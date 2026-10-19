@@ -1,7 +1,26 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { GarderieInfo } from "@/types";
+import { fetchGarderieInfo, defaultGarderieInfo } from "@/services/api";
 
 export default function Hero() {
+  const [info, setInfo] = useState<GarderieInfo>(defaultGarderieInfo);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchGarderieInfo().then((data) => {
+      if (isMounted) {
+        setInfo(data);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <section id="accueil" className="hero-section">
       <div className="container">
@@ -18,7 +37,7 @@ export default function Hero() {
               }}
             >
               <i className="bi bi-stars text-warning me-1"></i>
-              Garderie & Crèche Bilingue d'Excellence
+              Garderie & Crèche Bilingue d&apos;Excellence
             </span>
 
             <h1 className="display-4 fw-bold lh-sm mb-3">
@@ -27,9 +46,7 @@ export default function Hero() {
             </h1>
 
             <p className="lead text-muted fs-5 mb-4">
-              Bienvenue à <strong>Les Petits Rayons</strong>. Nous offrons à vos enfants
-              (de 3 mois à 6 ans) un cadre sécurisant, joyeux et stimulant avec une
-              alimentation 100 % biologique et un encadrement bienveillant.
+              {info.description}
             </p>
 
             {/* Boutons d'appel à l'action */}
@@ -44,7 +61,7 @@ export default function Hero() {
               </Link>
             </div>
 
-            {/* Badges de confiance */}
+            {/* Badges de confiance dynamiques */}
             <div className="d-flex flex-wrap justify-content-center justify-content-lg-start gap-4 mt-4 pt-3 border-top">
               <div className="d-flex align-items-center gap-2">
                 <div
@@ -53,7 +70,7 @@ export default function Hero() {
                 >
                   <i className="bi bi-shield-check"></i>
                 </div>
-                <span className="small fw-semibold text-secondary">Agrément PMI</span>
+                <span className="small fw-semibold text-secondary">{info.agrement || "Agrément PMI"}</span>
               </div>
               <div className="d-flex align-items-center gap-2">
                 <div
@@ -62,7 +79,7 @@ export default function Hero() {
                 >
                   <i className="bi bi-clock-history"></i>
                 </div>
-                <span className="small fw-semibold text-secondary">7h30 – 18h30</span>
+                <span className="small fw-semibold text-secondary">{info.horaires}</span>
               </div>
               <div className="d-flex align-items-center gap-2">
                 <div
@@ -71,7 +88,7 @@ export default function Hero() {
                 >
                   <i className="bi bi-heart-fill"></i>
                 </div>
-                <span className="small fw-semibold text-secondary">100 % Bio</span>
+                <span className="small fw-semibold text-secondary">Capacité {info.capacite} enfants</span>
               </div>
             </div>
           </div>
@@ -90,7 +107,7 @@ export default function Hero() {
                 <div>
                   <div className="fw-bold text-dark small lh-1">4.9 / 5 sur Google</div>
                   <div className="text-muted" style={{ fontSize: "0.72rem" }}>
-                    +180 avis
+                    +180 avis vérifiés
                   </div>
                 </div>
               </div>
@@ -98,13 +115,12 @@ export default function Hero() {
               {/* Image principale */}
               <div className="hero-image-wrapper">
                 <Image
-                  src="/images/hero-daycare.jpg"
-                  alt="Enfants jouant à la garderie Les Petits Rayons"
-                  width={640}
-                  height={480}
-                  className="w-100 h-auto"
+                  src="/images/hero-banner.jpg"
+                  alt="Enfants souriants jouant ensemble à la garderie"
+                  width={600}
+                  height={420}
+                  className="hero-image"
                   priority
-                  sizes="(max-width: 768px) 100vw, 540px"
                 />
               </div>
 
@@ -114,12 +130,14 @@ export default function Hero() {
                   className="bg-success text-white rounded-circle d-flex align-items-center justify-content-center"
                   style={{ width: 36, height: 36 }}
                 >
-                  <i className="bi bi-heart-fill"></i>
+                  <i className="bi bi-emoji-smile-fill"></i>
                 </div>
                 <div>
-                  <div className="fw-bold text-dark small lh-1">Accueil Bienveillant</div>
+                  <div className="fw-bold text-dark small lh-1">
+                    {info.statistiques?.[0]?.valeur || "98%"}
+                  </div>
                   <div className="text-muted" style={{ fontSize: "0.72rem" }}>
-                    De 3 mois à 6 ans
+                    {info.statistiques?.[0]?.label || "Parents satisfaits"}
                   </div>
                 </div>
               </div>

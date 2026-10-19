@@ -1,11 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { GarderieInfo } from "@/types";
+import { fetchGarderieInfo, defaultGarderieInfo } from "@/services/api";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [info, setInfo] = useState<GarderieInfo>(defaultGarderieInfo);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchGarderieInfo().then((data) => {
+      if (isMounted) setInfo(data);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg sticky-top daycare-navbar py-2">
@@ -67,6 +80,11 @@ export default function Navbar() {
             <li className="nav-item">
               <Link href="#services" className="nav-link" onClick={() => setMenuOpen(false)}>
                 Nos Services
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="#activites" className="nav-link" onClick={() => setMenuOpen(false)}>
+                Activités
               </Link>
             </li>
             <li className="nav-item">
